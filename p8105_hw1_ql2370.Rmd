@@ -9,14 +9,31 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+## Problem 1
 
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
 ```{r cars}
-summary(cars)
+library(tidyverse)
+
+#create a data frame
+basic_df = tibble(
+  random_sample = rnorm(8),
+  vec_logical = random_sample > 0,
+  vec_char = c("This", "is", "H", "W", "1", "done", "by", "QiLu"),
+  vec_factor = factor(c("I", "I", "I", "II", "II", "II", "III", "III") )
+  
+)
+
+pull(basic_df, random_sample)
+pull(basic_df, vec_logical)
+pull(basic_df, vec_factor)
+
+mean(as.numeric(pull(basic_df,vec_logical)))
+mean(as.numeric(pull(basic_df,vec_char)))
+mean(as.numeric(pull(basic_df,vec_factor)))
 ```
 
 ## Including Plots
