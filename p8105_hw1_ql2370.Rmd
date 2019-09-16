@@ -11,11 +11,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Problem 1
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+First of all, the library we used should be imported
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
+```{r cars, echo}
 library(tidyverse)
 
 #create a data frame
@@ -34,6 +32,33 @@ pull(basic_df, vec_factor)
 mean(as.numeric(pull(basic_df,vec_logical)))
 mean(as.numeric(pull(basic_df,vec_char)))
 mean(as.numeric(pull(basic_df,vec_factor)))
+```
+
+# The second code chunk
+
+```{r}
+# convert logical vector to numberic
+x = as.numeric(pull(basic_df, vec_factor))
+y = x * as.numeric(pull(basic_df, random_sample))
+
+x
+y
+
+# convert logical vertor to factor
+x1 = as.factor(pull(basic_df, vec_factor))
+y1 = x * as.factor(pull(basic_df, random_sample))
+
+x1
+y1
+
+# convert logical vertor to factor to numberic
+x2 = as.numeric(as.factor(pull(basic_df, vec_factor)))
+y2 = x2 * as.numeric(pull(basic_df, random_sample))
+
+x2
+y2
+
+
 ```
 
 ## Including Plots
