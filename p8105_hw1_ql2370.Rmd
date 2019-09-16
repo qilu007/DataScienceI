@@ -61,12 +61,38 @@ y2
 
 ```
 
-## Including Plots
+## Problem 2
 
 You can also embed plots, for example:
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r plot_prob2}
+
+set.seed(1)
+
+plot_df = tibble(
+  x = rnorm(500),
+  y = rnorm(500),
+  vec_logical = (x + y)> 0,
+  vec_numberic = c(as.numeric(vec_logical)),
+  vec_factor = c(as.factor(vec_numberic))
+)
+
+# color points using logical variables
+p1 <- ggplot(plot_df, aes (x = x, y = y, color = vec_logical)) + geom_point()
+p1
+
+# color points using numberic variables
+ggplot(plot_df, aes (x = x, y = y, color = vec_numberic)) + geom_point()
+
+# color points using factor variables
+ggplot(plot_df, aes (x = x, y = y, color = vec_factor)) + geom_point()
+
+# export scatterplot by ggsave
+
+
+ggsave(filename = "hw1_problem2_plot", plot = p1,
+    device = "pdf", path = NULL,
+    scale = 1)
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
