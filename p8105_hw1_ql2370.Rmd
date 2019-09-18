@@ -5,7 +5,7 @@ date: "9/16/2019"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include=FALSE, cache=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -72,24 +72,25 @@ set.seed(1)
 plot_df = tibble(
   x = rnorm(500),
   y = rnorm(500),
-  vec_logical = (x + y)> 0,
-  vec_numberic = c(as.numeric(vec_logical)),
-  vec_factor = c(as.factor(vec_numberic))
+  vec_logical1 = (x + y)> 0,
+  vec_numberic1 = c(as.numeric(vec_logical1)),
+  vec_factor1 = c(as.factor(vec_numberic1))
 )
 
 # color points using logical variables
-p1 <- ggplot(plot_df, aes (x = x, y = y, color = vec_logical)) + geom_point()
+p1 <- ggplot(plot_df, aes (x = x, y = y, color = vec_logical1)) + geom_point()
 p1
 
 # color points using numberic variables
-ggplot(plot_df, aes (x = x, y = y, color = vec_numberic)) + geom_point()
+ggplot(plot_df, aes (x = x, y = y, color = vec_numberic1)) + geom_point()
 
 # color points using factor variables
-ggplot(plot_df, aes (x = x, y = y, color = vec_factor)) + geom_point()
+color_factor = as.logical(as.character(pull(plot_df, vec_logical1)))
+ggplot(plot_df, aes (x = x, y = y, colour = color_factor)) + geom_point()
+
+
 
 # export scatterplot by ggsave
-
-
 ggsave(filename = "hw1_problem2_plot", plot = p1,
     device = "pdf", path = NULL,
     scale = 1)
