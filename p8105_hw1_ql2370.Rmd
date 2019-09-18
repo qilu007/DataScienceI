@@ -5,13 +5,13 @@ date: "9/16/2019"
 output: html_document
 ---
 
-```{r setup, include=FALSE, cache=FALSE}
+```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## Problem 1
 
-First of all, the library we used should be imported
+First of all, the library we used should be imported.
 
 ```{r cars, echo}
 library(tidyverse)
@@ -29,33 +29,43 @@ pull(basic_df, random_sample)
 pull(basic_df, vec_logical)
 pull(basic_df, vec_factor)
 
+```
+The data frame is created, and means are shown by the below codes:
+
+```{r, eval=FALSE}
 mean(as.numeric(pull(basic_df,vec_logical)))
 mean(as.numeric(pull(basic_df,vec_char)))
 mean(as.numeric(pull(basic_df,vec_factor)))
 ```
-
-# The second code chunk
+Because characters have no mean, NA is shown.  
+The following chunk will show more after convert every types' varible into doubles.
 
 ```{r}
-# convert logical vector to numberic
+# 1.convert logical vector to numberic
 x = as.numeric(pull(basic_df, vec_factor))
 y = x * as.numeric(pull(basic_df, random_sample))
 
+# shows x
 x
+# show y
 y
 
-# convert logical vertor to factor
+# 2.convert logical vertor to factor
 x1 = as.factor(pull(basic_df, vec_factor))
 y1 = x * as.factor(pull(basic_df, random_sample))
 
+# shows x1
 x1
+# shows y1
 y1
 
-# convert logical vertor to factor to numberic
+# 3.convert logical vertor to factor to numberic
 x2 = as.numeric(as.factor(pull(basic_df, vec_factor)))
 y2 = x2 * as.numeric(pull(basic_df, random_sample))
 
+# shows x2
 x2
+# shows y2
 y2
 
 
@@ -63,7 +73,7 @@ y2
 
 ## Problem 2
 
-You can also embed plots, for example:
+This problem is a plot problem, so we need a seed to hold the random numbers.
 
 ```{r plot_prob2}
 
@@ -77,6 +87,10 @@ plot_df = tibble(
   vec_factor1 = c(as.factor(vec_numberic1))
 )
 
+```
+The plot data frame is created. Then, I will start plot graphs by ggplot.  
+The first plot will be coloring by the logical varibales, and the second will be coloring by the numberic varibles. Finally, the third one will be coloring by the factors.
+```{r}
 # color points using logical variables
 p1 <- ggplot(plot_df, aes (x = x, y = y, color = vec_logical1)) + geom_point()
 p1
@@ -87,13 +101,18 @@ ggplot(plot_df, aes (x = x, y = y, color = vec_numberic1)) + geom_point()
 # color points using factor variables
 color_factor = as.logical(as.character(pull(plot_df, vec_logical1)))
 ggplot(plot_df, aes (x = x, y = y, colour = color_factor)) + geom_point()
+```
 
-
-
+The final part of problem 2 is save the first plot by ggsave. 
+```{r}
 # export scatterplot by ggsave
 ggsave(filename = "hw1_problem2_plot", plot = p1,
     device = "pdf", path = NULL,
     scale = 1)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+Therefore, my HW1 is finished! 
+  
+Thank you for grading!
+  
+Qi
